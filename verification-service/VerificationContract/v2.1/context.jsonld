@@ -44,6 +44,20 @@
     "type": "vc:identifierType",
     "identifierType": "vc:identifierType",
     "value": "vc:identifierValue",
-    "identifierValue": "vc:identifierValue"
+    "identifierValue": "vc:identifierValue",
+
+    "issuedCredentials": "vc:issuedCredentials",
+    "IssuedCredential": "vc:IssuedCredential",
+    "credentialId": "vc:credentialId",
+    "credentialType": "vc:credentialType",
+    "format": "vc:credentialFormat",
+    "credentialFormat": "vc:credentialFormat",
+    "url": "vc:credentialUrl",
+    "credentialUrl": "vc:credentialUrl",
+    "issuedAt": "vc:credentialIssuedAt",
+    "credentialIssuedAt": "vc:credentialIssuedAt",
+    "credentialExpiresAt": "vc:credentialExpiresAt",
+    "issuerId": "vc:issuerId",
+    "embeddedCredential": "vc:embeddedCredential"
   }
 }

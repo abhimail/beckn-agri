@@ -129,6 +129,110 @@ components:
           type: string
           format: date-time
 
+        issuedCredentials:
+          x-jsonld-id: "vc:issuedCredentials"
+          description: >
+            Credentials issued by the verifier as deliverables of this
+            verification contract. Each entry points to (or embeds) a signed
+            artifact — a W3C Verifiable Credential, a PDF certificate, or a
+            signed image — that the Requesting NP can carry, present, or store
+            as portable proof of the verification outcome.
+
+            Credentials at this level are contract-scoped: they attest to the
+            aggregate outcome across all verification types in the contract.
+            Per-check credentials (attesting to one specific verification type)
+            are carried in VerificationPerformance.
+
+            This field is populated by the BPP on confirm or on_status, once
+            the verification is complete and credentials have been issued.
+          type: array
+          items:
+            $ref: '#/components/schemas/IssuedCredential'
+
+    IssuedCredential:
+      type: object
+      description: >
+        A single issued credential artifact produced as the output of a
+        verification contract. May be a W3C Verifiable Credential, a signed
+        PDF certificate, or a signed image. The artifact may be linked via URL
+        (for externally hosted credentials) or embedded inline (for small
+        JSON-LD VCs where URL persistence cannot be guaranteed).
+      required:
+        - credentialId
+        - credentialType
+      properties:
+        credentialId:
+          x-jsonld-id: "vc:credentialId"
+          type: string
+          description: >
+            Unique identifier for this credential, assigned by the issuing
+            verification provider. Stable across re-fetches of the same
+            credential.
+
+        credentialType:
+          x-jsonld-id: "vc:credentialType"
+          type: string
+          description: >
+            The format or standard of the issued credential.
+          enum:
+            - W3C_VC
+            - PDF
+            - IMAGE
+            - OPEN_BADGE
+            - OTHER
+
+        format:
+          x-jsonld-id: "vc:credentialFormat"
+          type: string
+          description: >
+            MIME type of the credential artifact. Examples:
+            application/ld+json (W3C VC), application/pdf,
+            image/png, image/jpeg.
+
+        url:
+          x-jsonld-id: "vc:credentialUrl"
+          type: string
+          format: uri
+          description: >
+            URL at which the credential artifact can be retrieved. May be
+            time-limited (pre-signed URL) or persistent. At least one of
+            url or embeddedCredential must be present.
+
+        issuedAt:
+          x-jsonld-id: "vc:credentialIssuedAt"
+          type: string
+          format: date-time
+          description: >
+            Timestamp when this credential was issued by the verification
+            provider.
+
+        credentialExpiresAt:
+          x-jsonld-id: "vc:credentialExpiresAt"
+          type: string
+          format: date-time
+          description: >
+            Timestamp after which this credential is no longer valid.
+            Distinct from the contract's expiresAt: the credential may
+            have a longer or shorter validity window than the contract.
+
+        issuerId:
+          x-jsonld-id: "vc:issuerId"
+          type: string
+          description: >
+            DID or provider-specific identifier of the entity that issued
+            the credential. For W3C VCs this should match the issuer field
+            inside the VC payload.
+
+        embeddedCredential:
+          x-jsonld-id: "vc:embeddedCredential"
+          type: object
+          additionalProperties: true
+          description: >
+            The full credential payload embedded inline. Used when the
+            credential is a W3C VC in JSON-LD form and the issuer prefers
+            not to rely on URL persistence. If url is also present, this
+            field takes precedence for cryptographic verification.
+
     SubjectReference:
       type: object
       description: >
