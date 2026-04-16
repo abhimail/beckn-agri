@@ -9,7 +9,7 @@ components:
   schemas:
     AgriServiceOffer:
       allOf:
-        - $ref: "../../ServiceOffer/v2.1/attributes.yaml#/components/schemas/ServiceOffer"
+        - $ref: "../../services/ServiceOffer/v2.1/attributes.yaml#/components/schemas/ServiceOffer"
       type: object
       x-beckn-container: offerAttributes
       x-jsonld:

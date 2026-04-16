@@ -9,7 +9,7 @@ components:
   schemas:
     AgriServicePerformance:
       allOf:
-        - $ref: "../../ServicePerformance/v2.1/attributes.yaml#/components/schemas/ServicePerformance"
+        - $ref: "../../services/ServicePerformance/v2.1/attributes.yaml#/components/schemas/ServicePerformance"
       type: object
       x-beckn-container: performanceAttributes
       x-jsonld:
