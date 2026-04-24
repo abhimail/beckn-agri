@@ -108,6 +108,10 @@ components:
         and outcome credentials — for discovery by learner BAPs.
       x-jsonld-context: "./context.jsonld"
       x-beckn-container: resourceAttributes
+      x-status: under-review
+      x-tags:
+        - skilling
+        - resource
       required: [delivery_mode, course_level, duration_hours]
       properties:
         delivery_mode:

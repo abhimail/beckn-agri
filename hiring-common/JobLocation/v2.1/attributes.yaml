@@ -39,6 +39,11 @@ components:
     JobLocation:
       type: object
       x-beckn-shared-type: true
+      x-status: under-review
+      x-tags:
+        - hiring
+        - hiring-common
+        - shared-type
       description: >
         Flexible hiring location. Supports city/region text filtering (most common
         use case) and GeoJSON geo-spatial queries. Either geo or at least one

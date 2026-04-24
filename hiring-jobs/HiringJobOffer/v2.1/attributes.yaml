@@ -9,6 +9,11 @@ components:
     HiringJobOffer:
       type: object
       x-beckn-container: offerAttributes
+      x-status: under-review
+      x-tags:
+        - hiring
+        - hiring-jobs
+        - offer
       x-jsonld:
         "@context": "https://schema.beckn.io/HiringJobOffer/v2.1/context.jsonld"
         "@type": "hjoa:HiringJobOffer"

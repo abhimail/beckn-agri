@@ -39,6 +39,11 @@ components:
         verification outcomes for the candidate hired.
       x-jsonld-context: "./context.jsonld"
       x-beckn-container: contractAttributes
+      x-status: under-review
+      x-tags:
+        - hiring
+        - hiring-candidates
+        - contract
       required: [hiring_stage, engagement_type]
       properties:
         hiring_stage:

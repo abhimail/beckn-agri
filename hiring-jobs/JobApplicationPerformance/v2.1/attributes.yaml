@@ -68,6 +68,11 @@ components:
     JobApplicationPerformance:
       type: object
       x-beckn-container: performanceAttributes
+      x-status: under-review
+      x-tags:
+        - hiring
+        - hiring-jobs
+        - performance
       x-jsonld:
         "@context": "https://schema.beckn.io/JobApplicationPerformance/v2.1/context.jsonld"
         "@type": "japa:JobApplicationPerformance"

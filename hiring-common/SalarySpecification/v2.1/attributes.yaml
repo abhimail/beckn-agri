@@ -19,6 +19,11 @@ components:
     SalarySpecification:
       type: object
       x-beckn-shared-type: true
+      x-status: under-review
+      x-tags:
+        - hiring
+        - hiring-common
+        - shared-type
       description: >
         A salary range or fixed value with currency and payment period.
         For a fixed salary set salary_min == salary_max, or provide only salary_min.

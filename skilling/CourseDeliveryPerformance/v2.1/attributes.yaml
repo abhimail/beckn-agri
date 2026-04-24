@@ -75,6 +75,10 @@ components:
         ACCESS (self-paced) and SERVICE (instructor-led) delivery modes.
       x-jsonld-context: "./context.jsonld"
       x-beckn-container: performanceAttributes
+      x-status: under-review
+      x-tags:
+        - skilling
+        - performance
       properties:
         delivery_url:
           type: string

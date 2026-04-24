@@ -17,6 +17,11 @@ components:
         - $ref: "https://schema.beckn.io/HiringJobResource/v2.1/attributes.yaml#/components/schemas/HiringJobResource"
       type: object
       x-beckn-container: resourceAttributes
+      x-status: under-review
+      x-tags:
+        - transport-hiring
+        - hiring
+        - resource
       x-jsonld-context: "./context.jsonld"
       description: >
         Driver-specific extension of HiringJobResource. Adds role type, required

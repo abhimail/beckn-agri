@@ -46,6 +46,11 @@ components:
         not identity), and the outcome. Zero PII.
       x-jsonld-context: "./context.jsonld"
       x-beckn-container: performanceAttributes
+      x-status: under-review
+      x-tags:
+        - hiring
+        - hiring-candidates
+        - performance
       required: [process_step]
       properties:
         process_step:

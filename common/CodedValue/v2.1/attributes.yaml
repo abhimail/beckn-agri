@@ -28,6 +28,10 @@ components:
   schemas:
     CodedValue:
       type: object
+      x-status: under-review
+      x-tags:
+        - common
+        - shared-type
       description: >
         A value from an external classification authority.
         Always include the code; name and @context are optional but recommended.

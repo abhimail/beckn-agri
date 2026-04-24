@@ -40,6 +40,10 @@ components:
         at the beckn:participants level.
       x-jsonld-context: "./context.jsonld"
       x-beckn-container: contractAttributes
+      x-status: under-review
+      x-tags:
+        - skilling
+        - contract
       required: [enrollment_date, stage]
       properties:
         enrollment_date:

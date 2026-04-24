@@ -27,6 +27,10 @@ components:
         and included extras for a specific course resource offering.
       x-jsonld-context: "./context.jsonld"
       x-beckn-container: offerAttributes
+      x-status: under-review
+      x-tags:
+        - skilling
+        - offer
       required: [price, currency]
       properties:
         price:

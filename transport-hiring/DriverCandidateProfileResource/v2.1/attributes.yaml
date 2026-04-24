@@ -18,6 +18,11 @@ components:
         - $ref: "https://schema.beckn.io/CandidateProfileResource/v2.1/attributes.yaml#/components/schemas/CandidateProfileResource"
       type: object
       x-beckn-container: resourceAttributes
+      x-status: under-review
+      x-tags:
+        - transport-hiring
+        - hiring
+        - resource
       x-jsonld-context: "./context.jsonld"
       description: >
         Driver-specific extension of CandidateProfileResource. Adds driver role types,

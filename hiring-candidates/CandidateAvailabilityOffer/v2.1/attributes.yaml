@@ -27,6 +27,11 @@ components:
         expectations, and terms the employer BAP must meet to initiate hiring.
       x-jsonld-context: "./context.jsonld"
       x-beckn-container: offerAttributes
+      x-status: under-review
+      x-tags:
+        - hiring
+        - hiring-candidates
+        - offer
       properties:
         available_from:
           type: string

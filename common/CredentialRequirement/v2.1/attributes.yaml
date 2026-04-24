@@ -32,6 +32,11 @@ components:
   schemas:
     CredentialRequirement:
       type: object
+      x-status: under-review
+      x-tags:
+        - common
+        - shared-type
+        - hiring
       description: >
         A prerequisite credential required for access. Supports self-declared
         (attested=false) and VC-backed (attested=true) verification modes.

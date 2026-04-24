@@ -50,6 +50,10 @@ components:
         voucher redemption for the value-exchange agreed in a course contract.
       x-jsonld-context: "./context.jsonld"
       x-beckn-container: considerationAttributes
+      x-status: under-review
+      x-tags:
+        - skilling
+        - consideration
       required: [payment_mode]
       properties:
         payment_mode:

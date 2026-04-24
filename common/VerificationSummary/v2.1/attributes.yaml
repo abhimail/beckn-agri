@@ -38,6 +38,12 @@ components:
 
     VerificationSummary:
       type: object
+      x-status: under-review
+      x-tags:
+        - common
+        - shared-type
+        - hiring
+        - skilling
       description: >
         Summary of credential verification outcome. Contains no VC payloads —
         only the verification result, timestamp, and optional notes.

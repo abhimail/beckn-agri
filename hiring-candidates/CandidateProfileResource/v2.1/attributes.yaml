@@ -131,6 +131,12 @@ components:
         sub-object.
       x-jsonld-context: "./context.jsonld"
       x-beckn-container: resourceAttributes
+      x-status: under-review
+      x-tags:
+        - hiring
+        - hiring-candidates
+        - resource
+        - transport-hiring
       required: [experience_level, availability_status]
       properties:
         experience_level:

@@ -12,6 +12,11 @@ components:
   schemas:
     ReputationSummary:
       type: object
+      x-status: under-review
+      x-tags:
+        - hiring
+        - hiring-common
+        - shared-type
       description: >
         Attestation-based reputation capsule. No centralised score — rating_value
         is attested by the named rating_agency.
