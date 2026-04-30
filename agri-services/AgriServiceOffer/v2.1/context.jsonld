@@ -1,6 +1,5 @@
 {
   "@context": {
-    "@import": "https://schema.beckn.io/core/v2/context.jsonld#generalised",
     "schema": "https://schema.org/",
     "beckn": "https://schema.beckn.io/",
     "asof": "https://schema.beckn.io/AgriServiceOffer#",
@@ -12,7 +11,12 @@
     "minimumQuantity": {"@id": "sof:minimumQuantity"},
     "maximumQuantity": {"@id": "sof:maximumQuantity"},
     "requiresAdvanceBooking": {"@id": "sof:requiresAdvanceBooking"},
-    "cancellationPolicyHours": {"@id": "sof:cancellationPolicyHours"},
+    "cancellationPolicies": {"@id": "sof:cancellationPolicies", "@container": "@list"},
+    "hoursBeforeService": {"@id": "sof:hoursBeforeService"},
+    "refundFraction": {"@id": "sof:refundFraction"},
+    "cancellationPolicyDescription": {"@id": "sof:cancellationPolicyDescription"},
+    "eligibilityCriteria": {"@id": "sof:eligibilityCriteria", "@container": "@list"},
+    "validityPeriodDays": {"@id": "sof:validityPeriodDays"},
     "bulkDiscountAvailable": {"@id": "sof:bulkDiscountAvailable"},
 
     "inputBrandOrVariety": {"@id": "asof:inputBrandOrVariety"}

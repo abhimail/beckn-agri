@@ -57,11 +57,23 @@ components:
           type: string
           description: ISO 3166-1 alpha-2 country code
           x-jsonld-id: "aspm:country"
-        gpsCoordinates:
-          type: string
-          pattern: "^-?\\d+\\.\\d+,-?\\d+\\.\\d+$"
-          description: GPS coordinates in format "latitude,longitude"
-          x-jsonld-id: "aspm:gpsCoordinates"
+        geo:
+          type: object
+          description: GeoJSON Point representing the farm location (longitude first, per GeoJSON spec)
+          x-jsonld-id: "aspm:geo"
+          properties:
+            type:
+              type: string
+              enum: [Point]
+              description: GeoJSON geometry type
+            coordinates:
+              type: array
+              items:
+                type: number
+              minItems: 2
+              maxItems: 2
+              description: "[longitude, latitude] per GeoJSON spec"
+          required: [type, coordinates]
         locationLandmark:
           type: string
           description: Landmark or notable location reference

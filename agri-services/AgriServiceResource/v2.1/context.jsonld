@@ -1,6 +1,5 @@
 {
   "@context": {
-    "@import": "https://schema.beckn.io/core/v2/context.jsonld#generalised",
     "schema": "https://schema.org/",
     "beckn": "https://schema.beckn.io/",
     "sr": "https://schema.beckn.io/ServiceResource#",
@@ -18,8 +17,10 @@
     "capacityPerDay": {"@id": "sr:capacityPerDay"},
     "capacityPerWeek": {"@id": "sr:capacityPerWeek"},
     "availabilitySchedule": {"@id": "sr:availabilitySchedule"},
+    "availabilityRecurrenceRule": {"@id": "sr:availabilityRecurrenceRule"},
     "minimumBookingAdvanceHours": {"@id": "sr:minimumBookingAdvanceHours"},
     "languagesSupported": {"@id": "sr:languagesSupported"},
+    "isoCode": {"@id": "sr:isoCode"},
 
     "serviceCategory": {"@id": "asr:serviceCategory"},
     "providerType": {"@id": "asr:providerType"},

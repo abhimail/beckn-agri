@@ -38,7 +38,7 @@ These schemas extend the generic-service pack via OpenAPI `allOf` references:
 ```yaml
 AgriServiceResource:
   allOf:
-    - $ref: "../../../generic-service/ServiceResource/v2.1/attributes.yaml#/components/schemas/ServiceResource"
+    - $ref: "../../services/ServiceResource/v2.1/attributes.yaml#/components/schemas/ServiceResource"
 ```
 
 This allows AgriServiceResource to inherit all ServiceResource fields while adding agriculture-specific properties.
@@ -48,13 +48,13 @@ This allows AgriServiceResource to inherit all ServiceResource fields while addi
 1. **Discovery** (on_discover): AgriServiceResource and AgriServiceOffer in catalogs (includes inherited generic-service fields)
 2. **Confirmation** (on_confirm): AgriServicePerformance in contract performance (includes inherited generic-service fields)
 
-## Example Scenario: Kuza Pilot
+## Example Scenario
 
-Dr. James Mwangi is a veterinarian in Kiambu County, Kenya offering poultry vaccination services:
+A veterinarian operating in a highland farming region offers poultry vaccination services (illustrative):
 
 - **Resource**: Poultry vaccination service (serviceCategory: VACCINATION, providerType: VET, livestockTypes: [POULTRY], coverage: village/ward/county level)
-- **Offer**: Service booking terms (quantity, advance booking, cancellation policy)
-- **Performance**: Vaccination visit to Grace Wanjiku's 200-bird poultry farm at GPS coordinates, with follow-up scheduling
+- **Offer**: Service booking terms (quantity, advance booking, cancellation policies)
+- **Performance**: Vaccination visit to a smallholder farmer's 200-bird poultry farm at the recorded farm location (GeoJSON Point), with follow-up scheduling
 
 ## Getting Started
 

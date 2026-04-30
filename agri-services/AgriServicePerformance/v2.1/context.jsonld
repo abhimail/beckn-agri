@@ -1,6 +1,5 @@
 {
   "@context": {
-    "@import": "https://schema.beckn.io/core/v2/context.jsonld#generalised",
     "schema": "https://schema.org/",
     "beckn": "https://schema.beckn.io/",
     "aspm": "https://schema.beckn.io/AgriServicePerformance#",
@@ -9,7 +8,8 @@
 
     "AgriServicePerformance": "aspm:AgriServicePerformance",
 
-    "appointmentWindow": {"@id": "spm:appointmentWindow"},
+    "appointmentWindowStart": {"@id": "spm:appointmentWindowStart"},
+    "appointmentWindowEnd": {"@id": "spm:appointmentWindowEnd"},
     "confirmedAppointmentTime": {"@id": "spm:confirmedAppointmentTime"},
     "serviceLocation": {"@id": "spm:serviceLocation"},
     "providerConfirmedCompletion": {"@id": "spm:providerConfirmedCompletion"},
@@ -27,7 +27,8 @@
     "ward": {"@id": "aspm:ward"},
     "county": {"@id": "aspm:county"},
     "country": {"@id": "aspm:country"},
-    "gpsCoordinates": {"@id": "aspm:gpsCoordinates"},
+    "geo": {"@id": "aspm:geo"},
+    "coordinates": {"@id": "aspm:coordinates", "@container": "@list"},
     "locationLandmark": {"@id": "aspm:locationLandmark"}
   }
 }
