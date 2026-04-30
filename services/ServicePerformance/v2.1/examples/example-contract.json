@@ -36,15 +36,17 @@
         "beckn:status": {"code": "PLANNED"},
         "beckn:commitmentIds": ["commitment-001"],
         "beckn:performanceAttributes": {
-          "appointmentWindow": {
-            "startDate": "2026-04-15",
-            "endDate": "2026-04-15"
-          },
+          "appointmentWindowStart": "2026-04-15T00:00:00Z",
+          "appointmentWindowEnd": "2026-04-15T23:59:59Z",
           "confirmedAppointmentTime": "2026-04-15T10:30:00Z",
           "serviceLocation": {
             "address": "Online - Video Call",
-            "region": "Delhi",
-            "country": "IN"
+            "pincode": "110001",
+            "locationLandmark": "Virtual session via secure video link",
+            "geo": {
+              "type": "Point",
+              "coordinates": [77.2090, 28.6139]
+            }
           },
           "providerConfirmedCompletion": false,
           "clientConfirmedCompletion": false,

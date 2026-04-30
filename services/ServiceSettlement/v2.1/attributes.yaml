@@ -1,8 +1,14 @@
 openapi: 3.1.1
+$id: "https://schema.beckn.io/ServiceSettlement/v2.1/attributes.yaml"
 info:
   title: ServiceSettlement Schema
   version: "2.1.0"
-  description: Schema for representing service settlement attributes in the generalised Beckn Protocol model
+  description: >
+    Schema for representing service settlement attributes in the generalised
+    Beckn Protocol model. Records payment receipt confirmation, timestamps, and
+    receipt references. Includes post-completion settlement adjustment support
+    for on-actuals reconciliation (ON_ACTUALS), partial delivery (PARTIAL), and
+    full refund (FULL_REFUND) scenarios, along with dispute reference tracking.
   x-beckn-container: settlementAttributes
 
 components:
@@ -10,19 +16,23 @@ components:
     ServiceSettlement:
       type: object
       x-beckn-container: settlementAttributes
+      x-status: under-review
+      x-tags:
+        - service
+        - generic-service
+        - settlement
       x-jsonld:
         "@context": "https://schema.beckn.io/ServiceSettlement/v2.1/context.jsonld"
         "@type": "ssl:ServiceSettlement"
       properties:
         paymentReceivedByProvider:
           type: boolean
-          default: false
-          description: Whether the payment has been received by the service provider
+          description: Whether the provider has confirmed receipt of payment
           x-jsonld-id: "ssl:paymentReceivedByProvider"
         paymentRecordedAt:
           type: string
           format: date-time
-          description: Timestamp when the payment was recorded in the system
+          description: Timestamp when payment receipt was recorded (ISO 8601)
           x-jsonld-id: "ssl:paymentRecordedAt"
         receiptRef:
           type: string
@@ -30,6 +40,56 @@ components:
           x-jsonld-id: "ssl:receiptRef"
         paymentNotes:
           type: string
-          maxLength: 300
-          description: Additional notes about the payment settlement
+          description: Free-text notes on the payment or settlement
           x-jsonld-id: "ssl:paymentNotes"
+        adjustmentType:
+          type: string
+          enum:
+            - NONE
+            - ON_ACTUALS
+            - PARTIAL
+            - FULL_REFUND
+          description: >
+            Type of post-completion settlement adjustment.
+            NONE: no adjustment; original amount stands.
+            ON_ACTUALS: final amount reconciled against actual units delivered
+            (e.g. camp patients seen vs. committed).
+            PARTIAL: partial settlement due to incomplete service delivery.
+            FULL_REFUND: full refund issued (e.g. service not delivered).
+          x-jsonld-id: "ssl:adjustmentType"
+        adjustmentAmount:
+          type: number
+          description: >
+            Net adjustment amount (positive = additional charge, negative = refund).
+            Required when adjustmentType is ON_ACTUALS, PARTIAL, or FULL_REFUND.
+          x-jsonld-id: "ssl:adjustmentAmount"
+        adjustmentReason:
+          type: string
+          description: Human-readable reason for the settlement adjustment
+          x-jsonld-id: "ssl:adjustmentReason"
+        adjustedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the adjustment was recorded (ISO 8601)
+          x-jsonld-id: "ssl:adjustedAt"
+        partialCompletionFraction:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: >
+            Fraction of the committed service actually delivered, expressed as a
+            decimal between 0 and 1 (e.g. 0.8 = 80% of patients screened in a camp).
+            Used to calculate on-actuals adjustment.
+          x-jsonld-id: "ssl:partialCompletionFraction"
+        finalSettlementRef:
+          type: string
+          description: >
+            Reference to the final settled transaction after all adjustments are applied.
+            Supersedes receiptRef once adjustments are complete.
+          x-jsonld-id: "ssl:finalSettlementRef"
+        disputeRef:
+          type: string
+          description: >
+            Reference to an active or resolved dispute or grievance raised
+            against this settlement.
+          x-jsonld-id: "ssl:disputeRef"

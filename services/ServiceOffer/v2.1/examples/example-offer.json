@@ -29,11 +29,14 @@
         "beckn:isAvailable": true,
         "beckn:resourceAttributes": {
           "serviceUnit": "PER_SESSION",
-          "coverageArea": {
-            "region": "West Delhi",
-            "country": "IN",
-            "coverageRadiusKm": 0
-          },
+          "coverageArea": [
+            {
+              "isoCode": "IN-DL",
+              "region": "West Delhi",
+              "country": "IN",
+              "coverageRadiusKm": 0
+            }
+          ],
           "capacityPerDay": 16,
           "capacityPerWeek": 80,
           "availabilitySchedule": [
@@ -75,7 +78,18 @@
           "minimumQuantity": 1,
           "maximumQuantity": 5,
           "requiresAdvanceBooking": true,
-          "cancellationPolicyHours": 2,
+          "cancellationPolicies": [
+            {
+              "hoursBeforeService": 48,
+              "refundFraction": 1.0,
+              "cancellationPolicyDescription": "Full refund if cancelled 48 or more hours before the session"
+            },
+            {
+              "hoursBeforeService": 24,
+              "refundFraction": 0.5,
+              "cancellationPolicyDescription": "50% refund if cancelled between 24 and 48 hours before the session"
+            }
+          ],
           "bulkDiscountAvailable": false
         }
       }]

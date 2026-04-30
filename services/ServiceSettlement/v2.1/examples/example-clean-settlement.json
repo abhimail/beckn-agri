@@ -1,0 +1,26 @@
+{
+  "_comment": "Standard settlement — payment received, no adjustment needed",
+  "context": {
+    "action": "on_update",
+    "schemaContext": ["https://schema.beckn.io/ServiceSettlement/v2.2/context.jsonld"]
+  },
+  "message": {
+    "contract": {
+      "@type": "beckn:Contract",
+      "beckn:id": "contract-consume-001",
+      "beckn:settlements": [{
+        "@type": "beckn:Settlement",
+        "beckn:id": "settle-001",
+        "beckn:status": {"code": "COMPLETE"},
+        "beckn:settlementAttributes": {
+          "@type": "ssl:ServiceSettlement",
+          "paymentReceivedByProvider": true,
+          "paymentRecordedAt": "2026-06-01T10:45:00+05:30",
+          "receiptRef": "RCP-SWAASA-2026060100123",
+          "adjustmentType": "NONE",
+          "paymentNotes": "Cash collected at counter"
+        }
+      }]
+    }
+  }
+}

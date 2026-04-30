@@ -11,14 +11,15 @@ The Generic Service schema pack provides a comprehensive set of extension schema
 
 ## Schemas
 
-This pack includes 6 extension schemas:
+This pack includes 7 extension schemas:
 
 1. **ServiceResource** - Resource-level attributes (service units, coverage areas, availability)
 2. **ServiceOffer** - Offer-level terms (quantity constraints, booking requirements, cancellation policy)
 3. **ServiceContract** - Contract-time metadata (booking channel, client notes)
 4. **ServicePerformance** - Execution details (appointment time, location, completion status)
-5. **ServiceConsideration** - Pricing and payment terms
-6. **ServiceSettlement** - Payment settlement tracking
+5. **ServiceConsideration** - Pricing and payment terms (fresh payment or entitlement drawdown)
+6. **ServiceSettlement** - Payment settlement tracking with on-actuals reconciliation
+7. **ServiceEntitlement** - Pre-purchased service capacity issued at procurement commit; drawn down by consuming engagements
 
 ## Use Cases
 
@@ -40,9 +41,16 @@ This schema pack is designed for:
 
 ## Transaction Flow
 
+### Standard (pay-per-engagement) flow
 1. **Discovery** (on_discover): ServiceResource and ServiceOffer in catalogs
-2. **Confirmation** (on_confirm): ServiceContract, ServicePerformance, ServiceConsideration
+2. **Confirmation** (on_confirm): ServiceContract, ServicePerformance, ServiceConsideration (with paymentAuthorisation)
 3. **Status Updates** (on_status): ServicePerformance updates, ServiceSettlement tracking
+
+### Procurement (entitlement) flow
+1. **Procurement Discovery** (on_discover): ServiceResource and ServiceOffer (bulk/institutional pricing)
+2. **Procurement Confirmation** (on_confirm): ServiceContract, ServiceConsideration (milestone payments), ServiceEntitlement issued
+3. **Consuming Engagement** (on_confirm per patient/session): ServiceContract, ServicePerformance, ServiceConsideration (with entitlementRef drawing down ServiceEntitlement capacity)
+4. **Reconciliation** (on_status / update): ServiceSettlement with on-actuals adjustment; entitlement capacity updated via on_update
 
 ## Getting Started
 
@@ -78,6 +86,7 @@ The test suite validates:
 - `spm:` - ServicePerformance namespace
 - `scn:` - ServiceConsideration namespace
 - `ssl:` - ServiceSettlement namespace
+- `se:` - ServiceEntitlement namespace
 
 ## Next Steps
 

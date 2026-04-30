@@ -1,0 +1,34 @@
+{
+  "_comment": "Pay-at-counter flow — fresh payment authorisation, no entitlement",
+  "context": {
+    "action": "on_confirm",
+    "schemaContext": ["https://schema.beckn.io/ServiceConsideration/v2.2/context.jsonld"]
+  },
+  "message": {
+    "contract": {
+      "@type": "beckn:Contract",
+      "beckn:id": "contract-consume-001",
+      "beckn:consideration": [{
+        "@type": "beckn:Consideration",
+        "beckn:id": "cons-001",
+        "beckn:considerationAttributes": {
+          "@type": "scn:ServiceConsideration",
+          "pricePerUnit": 250,
+          "currency": "INR",
+          "totalAmount": 250,
+          "netAmount": 250,
+          "paymentMethodsAccepted": ["CASH", "DIGITAL_WALLET"],
+          "selectedPaymentMethod": "CASH",
+          "payerArchetype": "SELF",
+          "transactionRef": "TXN-CASH-COUNTER-001",
+          "paymentAuthorisation": {
+            "authCode": "AUTH-CASH-001",
+            "authProvider": "COUNTER",
+            "authTimestamp": "2026-06-01T09:15:00+05:30",
+            "authAmount": 250
+          }
+        }
+      }]
+    }
+  }
+}

@@ -1,4 +1,5 @@
 openapi: 3.1.1
+$id: "https://schema.beckn.io/ServiceResource/v2.1/attributes.yaml"
 info:
   title: ServiceResource Schema
   version: "2.1.0"
@@ -10,6 +11,11 @@ components:
     ServiceResource:
       type: object
       x-beckn-container: resourceAttributes
+      x-status: under-review
+      x-tags:
+        - service
+        - generic-service
+        - resource
       x-jsonld:
         "@context": "https://schema.beckn.io/ServiceResource/v2.1/context.jsonld"
         "@type": "sr:ServiceResource"
@@ -25,11 +31,15 @@ components:
             - PER_DAY
             - PER_PIECE
             - OTHER
-          description: Unit of service measurement
+          description: Billing unit of service measurement
           x-jsonld-id: "sr:serviceUnit"
         coverageArea:
-          $ref: "#/components/schemas/ServiceCoverageArea"
-          description: Geographic coverage area for the service
+          type: array
+          items:
+            $ref: "#/components/schemas/ServiceCoverageArea"
+          description: >
+            Geographic coverage areas where this resource is available.
+            Multiple entries for resources serving several regions.
           x-jsonld-id: "sr:coverageArea"
         capacityPerDay:
           type: integer
@@ -45,36 +55,53 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ServiceAvailabilitySlot"
-          description: Weekly availability schedule for the service
+          description: >
+            Weekly availability expressed as day/time slot objects.
+            Use for simple recurring weekly schedules.
           x-jsonld-id: "sr:availabilitySchedule"
+        availabilityRecurrenceRule:
+          type: string
+          description: >
+            Availability schedule expressed as an iCalendar RRULE string (RFC 5545).
+            Use for complex recurring schedules (e.g. bi-weekly, seasonal exceptions).
+            Example: "RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;BYHOUR=9;BYMINUTE=0"
+            Takes precedence over availabilitySchedule if both are present.
+          x-jsonld-id: "sr:availabilityRecurrenceRule"
         minimumBookingAdvanceHours:
           type: integer
           minimum: 0
-          description: Minimum hours in advance required to book the service
+          description: Minimum hours in advance required to book the service. 0 = on-demand.
           x-jsonld-id: "sr:minimumBookingAdvanceHours"
         languagesSupported:
           type: array
           items:
             type: string
-          description: ISO 639-1 language codes supported by the service provider
+          description: BCP 47 language codes supported by this resource (e.g. ["en", "hi", "kn"])
           x-jsonld-id: "sr:languagesSupported"
 
     ServiceCoverageArea:
       type: object
-      description: Geographic coverage area specifications
+      description: Geographic area where the service is available
       properties:
+        isoCode:
+          type: string
+          description: ISO 3166-2 subdivision code (e.g. "IN-KA" for Karnataka, "IN-MH" for Maharashtra)
+          x-jsonld-id: "sr:isoCode"
         region:
           type: string
-          description: Region or state name
+          description: Human-readable region or state name
           x-jsonld-id: "sr:region"
         country:
           type: string
-          description: ISO 3166-1 alpha-2 country code
+          description: ISO 3166-1 alpha-2 country code (e.g. "IN")
           x-jsonld-id: "sr:country"
         coverageRadiusKm:
           type: number
           minimum: 0
-          description: Coverage radius in kilometers (0 indicates online-only)
+          description: >
+            Coverage radius in kilometres from a central point.
+            0 indicates online-only (no geographic radius constraint).
+            Applicable for on-site services; omit for online/state-level services.
           x-jsonld-id: "sr:coverageRadiusKm"
 
     ServiceAvailabilitySlot:

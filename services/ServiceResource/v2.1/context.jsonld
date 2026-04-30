@@ -1,6 +1,5 @@
 {
   "@context": {
-    "@import": "https://schema.beckn.io/core/v2/context.jsonld#generalised",
     "schema": "https://schema.org/",
     "beckn": "https://schema.beckn.io/",
     "sr": "https://schema.beckn.io/ServiceResource#",
@@ -13,12 +12,14 @@
     "DayOfWeek": "sr:DayOfWeek",
 
     "serviceUnit": {"@id": "sr:serviceUnit"},
-    "coverageArea": {"@id": "sr:coverageArea"},
+    "coverageArea": {"@id": "sr:coverageArea", "@container": "@list"},
     "capacityPerDay": {"@id": "sr:capacityPerDay"},
     "capacityPerWeek": {"@id": "sr:capacityPerWeek"},
-    "availabilitySchedule": {"@id": "sr:availabilitySchedule"},
+    "availabilitySchedule": {"@id": "sr:availabilitySchedule", "@container": "@list"},
+    "availabilityRecurrenceRule": {"@id": "sr:availabilityRecurrenceRule"},
     "minimumBookingAdvanceHours": {"@id": "sr:minimumBookingAdvanceHours"},
-    "languagesSupported": {"@id": "sr:languagesSupported"},
+    "languagesSupported": {"@id": "sr:languagesSupported", "@container": "@list"},
+    "isoCode": {"@id": "sr:isoCode"},
     "region": {"@id": "sr:region"},
     "country": {"@id": "sr:country"},
     "coverageRadiusKm": {"@id": "sr:coverageRadiusKm"},

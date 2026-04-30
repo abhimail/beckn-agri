@@ -1,0 +1,26 @@
+{
+  "_comment": "Procurement-then-consume flow — entitlement drawdown, no fresh payment",
+  "context": {
+    "action": "on_confirm",
+    "schemaContext": ["https://schema.beckn.io/ServiceConsideration/v2.2/context.jsonld"]
+  },
+  "message": {
+    "contract": {
+      "@type": "beckn:Contract",
+      "beckn:id": "contract-consume-002",
+      "beckn:consideration": [{
+        "@type": "beckn:Consideration",
+        "beckn:id": "cons-002",
+        "beckn:considerationAttributes": {
+          "@type": "scn:ServiceConsideration",
+          "pricePerUnit": 250,
+          "currency": "INR",
+          "totalAmount": 250,
+          "netAmount": 250,
+          "payerArchetype": "GOVERNMENT",
+          "entitlementRef": "ent-550e8400-e29b-41d4-a716-446655440000"
+        }
+      }]
+    }
+  }
+}

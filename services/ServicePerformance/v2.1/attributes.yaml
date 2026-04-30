@@ -1,4 +1,5 @@
 openapi: 3.1.1
+$id: "https://schema.beckn.io/ServicePerformance/v2.1/attributes.yaml"
 info:
   title: ServicePerformance Schema
   version: "2.1.0"
@@ -10,14 +11,25 @@ components:
     ServicePerformance:
       type: object
       x-beckn-container: performanceAttributes
+      x-status: under-review
+      x-tags:
+        - service
+        - generic-service
+        - performance
       x-jsonld:
         "@context": "https://schema.beckn.io/ServicePerformance/v2.1/context.jsonld"
         "@type": "spm:ServicePerformance"
       properties:
-        appointmentWindow:
-          $ref: "#/components/schemas/ServiceAppointmentWindow"
-          description: Scheduled appointment date range
-          x-jsonld-id: "spm:appointmentWindow"
+        appointmentWindowStart:
+          type: string
+          format: date-time
+          description: Start of the offered appointment window (ISO 8601 date-time)
+          x-jsonld-id: "spm:appointmentWindowStart"
+        appointmentWindowEnd:
+          type: string
+          format: date-time
+          description: End of the offered appointment window (ISO 8601 date-time)
+          x-jsonld-id: "spm:appointmentWindowEnd"
         confirmedAppointmentTime:
           type: string
           format: date-time
@@ -53,43 +65,35 @@ components:
           description: Suggested date for follow-up service if required
           x-jsonld-id: "spm:followUpDate"
 
-    ServiceAppointmentWindow:
-      type: object
-      description: Time window for scheduled appointment
-      properties:
-        startDate:
-          type: string
-          format: date
-          description: Start date of appointment window (YYYY-MM-DD)
-          x-jsonld-id: "spm:startDate"
-        endDate:
-          type: string
-          format: date
-          description: End date of appointment window (YYYY-MM-DD)
-          x-jsonld-id: "spm:endDate"
-
     ServiceLocation:
       type: object
-      description: Geographic location where service is delivered
+      description: Physical location where the service is or was delivered
       properties:
         address:
           type: string
-          description: Street address or location description
+          description: Street address or human-readable location description
           x-jsonld-id: "spm:address"
-        region:
+        pincode:
           type: string
-          description: Region or state name
-          x-jsonld-id: "spm:region"
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code
-          x-jsonld-id: "spm:country"
-        gpsCoordinates:
-          type: string
-          pattern: "^-?\\d+\\.\\d+,-?\\d+\\.\\d+$"
-          description: GPS coordinates in format "latitude,longitude"
-          x-jsonld-id: "spm:gpsCoordinates"
+          description: Postal or PIN code of the service location
+          x-jsonld-id: "spm:pincode"
         locationLandmark:
           type: string
-          description: Landmark or notable location reference
+          description: Landmark or notable location reference to aid navigation
           x-jsonld-id: "spm:locationLandmark"
+        geo:
+          type: object
+          description: GeoJSON Point geometry for the service location
+          x-jsonld-id: "spm:geo"
+          properties:
+            type:
+              type: string
+              enum: [Point]
+              description: GeoJSON geometry type — always "Point"
+            coordinates:
+              type: array
+              items:
+                type: number
+              minItems: 2
+              maxItems: 2
+              description: "[longitude, latitude] per GeoJSON convention"

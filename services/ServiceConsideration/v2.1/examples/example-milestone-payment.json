@@ -1,0 +1,51 @@
+{
+  "_comment": "Bulk procurement — milestone payment schedule (advance + completion)",
+  "context": {
+    "action": "on_confirm",
+    "schemaContext": ["https://schema.beckn.io/ServiceConsideration/v2.2/context.jsonld"]
+  },
+  "message": {
+    "contract": {
+      "@type": "beckn:Contract",
+      "beckn:id": "contract-procure-001",
+      "beckn:consideration": [{
+        "@type": "beckn:Consideration",
+        "beckn:id": "cons-procure-001",
+        "beckn:considerationAttributes": {
+          "@type": "scn:ServiceConsideration",
+          "pricePerUnit": 250,
+          "currency": "INR",
+          "totalAmount": 250000,
+          "netAmount": 237500,
+          "discountRef": "BULK-DISCOUNT-5PCT",
+          "paymentMethodsAccepted": ["BANK_TRANSFER"],
+          "selectedPaymentMethod": "BANK_TRANSFER",
+          "payerArchetype": "GOVERNMENT",
+          "paymentSchedule": [
+            {
+              "milestoneId": "M1-ADVANCE",
+              "description": "50% advance on contract confirmation",
+              "dueDate": "2026-05-20",
+              "amount": 118750,
+              "paid": true,
+              "paidAt": "2026-05-19T14:00:00+05:30"
+            },
+            {
+              "milestoneId": "M2-COMPLETION",
+              "description": "Balance on consumption of 80% or more of entitlement capacity",
+              "dueDate": "2027-04-30",
+              "amount": 118750,
+              "paid": false
+            }
+          ],
+          "paymentAuthorisation": {
+            "authCode": "NEFT-UTR-2026051900123",
+            "authProvider": "SBI-GOVT",
+            "authTimestamp": "2026-05-19T14:00:00+05:30",
+            "authAmount": 118750
+          }
+        }
+      }]
+    }
+  }
+}
