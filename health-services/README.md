@@ -38,7 +38,7 @@ All Health* schemas extend the `generic-service` base pack. The base pack must b
 | HealthConsideration | ServiceConsideration |
 | HealthSettlement | ServiceSettlement |
 | HealthEntitlement | ServiceEntitlement |
-| HealthParticipant | *(standalone — no base)* |
+| HealthParticipant | ServiceParticipant/v2.1 |
 
 ## Use Cases
 
@@ -84,4 +84,4 @@ The `healthServiceType` field in HealthContract is the central discriminator for
 - `hcn:` — HealthConsideration
 - `hsl:` — HealthSettlement
 - `hen:` — HealthEntitlement
-- `hpt:` — HealthParticipant
+- `hpa:` — HealthParticipant

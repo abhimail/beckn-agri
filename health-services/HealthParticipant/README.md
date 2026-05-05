@@ -1,7 +1,7 @@
 # HealthParticipant Schema
 
 **Container:** `Participant.participantAttributes`
-**Extends:** *(standalone — no generic-service base)*
+**Extends:** `ServiceParticipant/v2.1`
 **Protocol Version:** 2.0
 **Semantic Model:** generalised
 **Use Cases:** UC1 single patient engagement, UC2 camp engagement
@@ -11,7 +11,7 @@
 
 HealthParticipant captures health-specific participant attributes for individuals and organisations involved in a health service contract on the ONHS network. It models six distinct roles — PATIENT, CARE_GIVER, SPECIALIST, FIELD_WORKER, PAYER, IMPLEMENTING_AGENCY — with role-appropriate identity, credential, and payer detail sub-objects.
 
-Unlike other Health* schemas, HealthParticipant has no generic-service base to extend. Participant attributes are health-network-specific enough that a generic-service base would add no reusable value.
+HealthParticipant extends ServiceParticipant to inherit `credentialRefs`, the generic runtime credential proof array, and adds health-specific fields on top via `allOf`.
 
 ## Attachment Points
 
@@ -21,9 +21,11 @@ Attaches to `Participant.participantAttributes` within `Contract.participants[]`
 
 - **Six typed roles rather than a flat attribute bag** — Health contracts involve a varied cast of participants with fundamentally different attribute needs. Typing roles explicitly and making role-specific sub-objects conditionally required (specialistAccreditation for SPECIALIST, payerDetails for PAYER) prevents implementers from populating irrelevant fields and makes validation meaningful.
 
-- **ABHA as the patient identity anchor** — The Ayushman Bharat Health Account (ABHA) ID is India's national health identifier. Surfacing it as a top-level field (rather than burying it in a generic identifier array) makes it directly filterable and linkable to the national health stack. The field is optional because not all ONHS deployments will operate within the ABHA ecosystem, and international deployments may substitute a different national health identifier.
+- **`healthIds` as a generic health identifier array** — Rather than surfacing a single ABHA ID (India-specific, patient-scoped), HealthParticipant models health-sector identifiers as an array of `{system, value}` pairs. The `system` field names the registry (ABHA, NMC, HFR, NPI, GMC, NHS, ASHA-ID, State-HID-KA, NGO-REG) and the `value` carries the identifier within that registry. This covers all six participant roles across geographies: a PATIENT may carry an ABHA or NHS number; a SPECIALIST carries an NMC or NPI registration; a FIELD_WORKER carries an ASHA ID; a PAYER carries an insurer registration. The issuing authority need not be national — state registries, professional councils, and facility registries are equally valid systems. The array is optional and can hold multiple identifiers when a participant is registered in more than one system.
 
-- **`specialistAccreditation` mirroring `clinicalValidation` on HealthResource** — The same credential structure (accreditation body, registration number, specialty, validity) appears both on the Resource (the service unit) and on the participant playing the SPECIALIST role. At Resource level it describes the service capability; at Participant level it identifies the individual practitioner delivering a specific engagement. Both are needed: the Resource credential is discovery-time, the Participant credential is contract-time.
+- **`specialistAccreditation` mirroring `clinicalValidation` on HealthResource** — The same credential structure (accreditation body, registration number, specialty, validity) appears both on the Resource (the service unit) and on the participant playing the SPECIALIST role. At Resource level it describes the service capability; at Participant level it identifies the individual practitioner delivering a specific engagement. Both are needed: the Resource credential is discovery-time, the Participant credential is contract-time. Note the distinction between `specialistAccreditation` and `credentialRefs`: the former is structured, query-friendly metadata modelled explicitly for filtering and audit; the latter is the cryptographic or documentary proof (a W3C VC or PDF link) that backs the claim. Both should be present for SPECIALIST participants in regulated deployments.
+
+- **`credentialRefs` inherited from ServiceParticipant** — Runtime credential proof for any participant role. A SPECIALIST attaches their signed W3C Verifiable Credential from the NMC; an IMPLEMENTING_AGENCY attaches their NGO registration document (Beckn Document/2.0 with `standard: "NGORegistration"`); a FIELD_WORKER attaches their ASHA ID card image (`standard: "ASHAIdentityCard"`). Beckn Credential/2.0 is a `oneOf`: the W3C VC branch is an opaque JSON object (Beckn does not validate internal VC structure — the W3C VC Data Model governs that); the Document branch is a Beckn Document/2.0 requiring `label`, `url`, and `mimeType`, with the optional `standard` field carrying the credential type string. This covers both regulated professional contexts (machine-verifiable VCs) and low-infrastructure field deployments (PDF or image document references).
 
 - **`payerDetails` for institutional payers** — When `payerArchetype` in HealthConsideration is GOVERNMENT, INSURANCE, or NGO, the contract should identify the paying organisation by name, ID, and scheme reference. `payerDetails` on the PAYER participant provides this without polluting the Consideration schema with identity fields.
 
@@ -38,5 +40,6 @@ Attaches to `Participant.participantAttributes` within `Contract.participants[]`
 
 ## Upstream Candidates
 
-- Typed participant role pattern with role-conditional sub-objects — the structure of declaring a `role` enum and making sub-objects conditionally required by role is applicable to any multi-party domain (legal services: CLIENT / COUNSEL / JUDGE; education: STUDENT / INSTRUCTOR / GUARDIAN; financial services: BORROWER / GUARANTOR / LENDER). Could be generalised as a `participantAttributes` base schema in the generic-service pack.
-- `specialistAccreditation` / `credentialValidation` structure — as noted under HealthResource, the accreditation body + registration number + specialty + validity structure is domain-neutral and could be promoted to a shared type.
+- Typed participant role pattern with role-conditional sub-objects — the structure of declaring a `role` enum and making sub-objects conditionally required by role is applicable to any multi-party domain (legal services: CLIENT / COUNSEL / JUDGE; education: STUDENT / INSTRUCTOR / GUARDIAN; financial services: BORROWER / GUARANTOR / LENDER). Could be generalised as a `participantRole` field in the ServiceParticipant base.
+- `healthIds` (`{system, value}` identifier array) — the generic health identifier pattern is applicable to any regulated domain where participants carry multiple sector-specific IDs. Could be generalised in ServiceParticipant as a `sectorIds` array.
+- `specialistAccreditation` / `credentialValidation` structure — the accreditation body + registration number + specialty + validity structure is domain-neutral and could be promoted to a shared `AccreditationRecord` type usable across health, legal, and education domains.

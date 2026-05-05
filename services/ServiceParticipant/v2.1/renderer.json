@@ -1,0 +1,16 @@
+{
+  "schema": "ServiceParticipant",
+  "version": "2.1.0",
+  "defaultView": "participant-card",
+  "views": {
+    "participant-card": {
+      "sections": [
+        {
+          "id": "credentials",
+          "label": "Credentials",
+          "fields": ["credentialRefs"]
+        }
+      ]
+    }
+  }
+}

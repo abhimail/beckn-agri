@@ -1,9 +1,9 @@
 {
   "@context": {
-    "@import": "https://schema.beckn.io/core/v2/context.jsonld#generalised",
     "schema": "https://schema.org/",
     "beckn": "https://schema.beckn.io/",
     "hpa": "https://schema.beckn.io/HealthParticipant#",
+    "sp": "https://schema.beckn.io/ServiceParticipant#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
 
     "HealthParticipant": "hpa:HealthParticipant",
@@ -11,7 +11,9 @@
     "Gender": "hpa:Gender",
 
     "participantRole": {"@id": "hpa:participantRole"},
-    "abhaId": {"@id": "hpa:abhaId"},
+    "healthIds": {"@id": "hpa:healthIds", "@container": "@list"},
+    "system": {"@id": "hpa:system"},
+    "value": {"@id": "hpa:value"},
     "dateOfBirth": {"@id": "hpa:dateOfBirth"},
     "gender": {"@id": "hpa:gender"},
     "primaryLanguage": {"@id": "hpa:primaryLanguage"},
@@ -24,6 +26,8 @@
     "payerType": {"@id": "hpa:payerType"},
     "payerName": {"@id": "hpa:payerName"},
     "payerId": {"@id": "hpa:payerId"},
-    "schemeId": {"@id": "hpa:schemeId"}
+    "schemeId": {"@id": "hpa:schemeId"},
+
+    "credentialRefs": {"@id": "sp:credentialRefs", "@container": "@list"}
   }
 }

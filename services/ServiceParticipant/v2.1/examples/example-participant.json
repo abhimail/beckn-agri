@@ -1,0 +1,28 @@
+{
+  "participantAttributes": {
+    "credentialRefs": [
+      {
+        "@context": ["https://www.w3.org/2018/credentials/v1"],
+        "type": ["VerifiableCredential", "MedicalLicenceCredential"],
+        "issuer": "did:web:nmc.india.gov.in",
+        "issuanceDate": "2020-01-15T00:00:00Z",
+        "expirationDate": "2027-01-14T23:59:59Z",
+        "credentialSubject": {
+          "id": "did:example:dr-rajesh-sharma",
+          "registrationNumber": "NMC-2019-MH-98765",
+          "specialty": "Pulmonology"
+        }
+      },
+      {
+        "label": "NABH Facility Accreditation Certificate",
+        "url": "https://storage.example.com/creds/clinic-nabh-cert.pdf",
+        "mimeType": "application/pdf",
+        "standard": "FacilityAccreditation",
+        "security": {
+          "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "checksumAlgorithm": "SHA256"
+        }
+      }
+    ]
+  }
+}

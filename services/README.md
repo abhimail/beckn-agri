@@ -11,7 +11,7 @@ The Generic Service schema pack provides a comprehensive set of extension schema
 
 ## Schemas
 
-This pack includes 7 extension schemas:
+This pack includes 8 extension schemas:
 
 1. **ServiceResource** - Resource-level attributes (service units, coverage areas, availability)
 2. **ServiceOffer** - Offer-level terms (quantity constraints, booking requirements, cancellation policy)
@@ -19,7 +19,8 @@ This pack includes 7 extension schemas:
 4. **ServicePerformance** - Execution details (appointment time, location, completion status)
 5. **ServiceConsideration** - Pricing and payment terms (fresh payment or entitlement drawdown)
 6. **ServiceSettlement** - Payment settlement tracking with on-actuals reconciliation
-7. **ServiceEntitlement** - Pre-purchased service capacity issued at procurement commit; drawn down by consuming engagements
+7. **ServiceParticipant** - Base participant attributes (credentialRefs for runtime credential proof; extended by domain-specific participant schemas)
+8. **ServiceEntitlement** - Pre-purchased service capacity issued at procurement commit; drawn down by consuming engagements
 
 ## Use Cases
 
@@ -86,6 +87,7 @@ The test suite validates:
 - `spm:` - ServicePerformance namespace
 - `scn:` - ServiceConsideration namespace
 - `ssl:` - ServiceSettlement namespace
+- `sp:` - ServiceParticipant namespace
 - `se:` - ServiceEntitlement namespace
 
 ## Next Steps
