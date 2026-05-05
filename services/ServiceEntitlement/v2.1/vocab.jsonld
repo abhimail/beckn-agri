@@ -1,6 +1,5 @@
 {
   "@context": {
-    "@import": "https://schema.beckn.io/core/v2/vocab.jsonld",
     "se": "https://schema.beckn.io/ServiceEntitlement#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
   },

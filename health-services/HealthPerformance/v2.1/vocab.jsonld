@@ -1,6 +1,5 @@
 {
   "@context": {
-    "@import": "https://schema.beckn.io/core/v2/vocab.jsonld",
     "hpe": "https://schema.beckn.io/HealthPerformance#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
   },
