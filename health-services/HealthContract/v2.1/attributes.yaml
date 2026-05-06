@@ -166,10 +166,4 @@ components:
                 Presence triggers deletion attestation obligations in HealthPerformance.
               x-jsonld-id: "hct:withdrawnAt"
 
-      # When healthServiceType is DIAGNOSTIC_ANALYTICS, consent is required
-      if:
-        properties:
-          healthServiceType:
-            const: DIAGNOSTIC_ANALYTICS
-      then:
-        required: [consent]
+
